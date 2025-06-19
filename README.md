@@ -71,9 +71,6 @@ The setup script will:
 
 The CLI uses a YAML configuration file to define commands and project context. Look for a file named:
 - `.dev-cheat.yaml`
-- `.dev-cheat.yml`
-- `dev-commands.yaml`
-- `dev-commands.yml`
 
 ### Example Configuration
 

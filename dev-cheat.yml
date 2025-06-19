@@ -1,0 +1,276 @@
+# .dev-commands.yaml - Your personalized development command language
+
+# Project Context - This helps Claude understand your environment
+project:
+  name: "my-awesome-app"
+  type: "web-application"
+  stack: 
+    - "Python"
+    - "HTML"
+    - "CSS"
+    - "JavaScript (ES6+)"
+    - "JSON / SQL"
+  
+  # Your coding standards and preferences
+  standards:
+    commit_style: "conventional commits (feat:, fix:, docs:, etc.)"
+    file_structure: "simple organization with clear module separation"
+    testing: "pytest for backend, jest for frontend when needed"
+    styling: "Modern CSS with flexbox/grid, custom styling over frameworks"
+    state_management: "Simple state management with vanilla JS, localStorage when needed"
+    
+  # Your preferred tools and commands
+  tools:
+    package_manager: "pip (in venv) for Python, npm for JS dependencies"
+    linter: "flake8 + black for Python, eslint for JavaScript"
+    database: "Simple SQL or JSON data storage"
+    web_server: "python3 -m http.server 8000 for static, custom Python server for dynamic"
+    deployment: "Docker + docker-compose for complex setups"
+
+# Quick Commands - Simple word → action mappings
+quick_commands:
+  # Development workflow
+  build:
+    description: "Production build with optimization"
+    actions:
+      - "python -m pytest --cov=app"
+      - "python -m build"
+      - "echo 'Build complete! Ready for deployment.'"
+  
+  dev:
+    description: "Start development server"
+    actions:
+      - "python3 -m http.server 8000"
+      - "echo 'Development server running on http://localhost:8000'"
+  
+  dev-api:
+    description: "Start Python API server"
+    actions:
+      - "python app.py"
+      - "echo 'API server running. Check the output for port details.'"
+  
+  venv:
+    description: "Create and activate virtual environment"
+    actions:
+      - "python3 -m venv venv"
+      - "source venv/bin/activate"
+      - "pip install -r requirements.txt"
+      - "echo 'Virtual environment created and activated!'"
+  
+  fix:
+    description: "Auto-fix linting and formatting issues"
+    actions:
+      - "black ."
+      - "isort ."
+      - "flake8"
+      - "git add ."
+      - "git commit -m 'fix: auto-fix linting and formatting'"
+  
+  fix-js:
+    description: "Auto-fix JavaScript linting and formatting"
+    actions:
+      - "npx eslint --fix ."
+      - "npx prettier --write ."
+      - "git add ."
+      - "git commit -m 'fix: auto-fix JS linting and formatting'"
+  
+  test:
+    description: "Run Python test suite"
+    actions:
+      - "python -m pytest"
+      - "python -m pytest --cov=app"
+  
+  docker-up:
+    description: "Start Docker containers"
+    actions:
+      - "docker-compose up -d"
+      - "echo 'Docker containers started!'"
+  
+  docker-down:
+    description: "Stop Docker containers"
+    actions:
+      - "docker-compose down"
+      - "echo 'Docker containers stopped!'"
+  
+  clean:
+    description: "Clean build artifacts and reinstall dependencies"
+    actions:
+      - "rm -rf __pycache__ .pytest_cache build dist *.egg-info"
+      - "pip install -r requirements.txt"
+      - "echo 'Clean install complete!'"
+
+# AI-Powered Commands - These require Claude to generate actions
+ai_commands:
+  # Code generation
+  create:
+    app:
+      description: "Generate a new web application structure"
+      context_needed: ["app name", "purpose"]
+      template: |
+        Create a new web application structure following my stack preferences:
+        - Simple Python backend with a clean API 
+        - Modern HTML5 structure with semantic elements
+        - ES6+ JavaScript with modules
+        - CSS with flexbox/grid layouts
+        - Simple folder structure separating frontend/backend concerns
+        - README with setup instructions
+        - requirements.txt for Python dependencies
+        - Virtual environment setup
+    
+    api:
+      description: "Generate a simple Python API endpoint"
+      context_needed: ["endpoint path", "HTTP method", "functionality"]
+      template: |
+        Create a Python API endpoint following my patterns:
+        - Simple HTTP request handling
+        - Clear error handling and status codes
+        - JSON response formatting
+        - Simple data validation
+        - Documentation with usage examples
+        - Test cases
+    
+    component:
+      description: "Generate a JavaScript component with HTML/CSS"
+      context_needed: ["component name", "functionality"]
+      template: |
+        Create a modern vanilla JavaScript component:
+        - ES6+ class or module pattern
+        - Clean HTML structure with semantic elements
+        - Modular CSS with good class naming
+        - Event handling and DOM manipulation
+        - Mobile-friendly responsive design
+        - Clear documentation with usage examples
+    
+    data:
+      description: "Generate data model and storage solution"
+      context_needed: ["data type", "structure", "storage preference (SQL/JSON)"]
+      template: |
+        Create a data storage solution based on my preferences:
+        - Simple data model with proper types
+        - Storage implementation (SQL or JSON)
+        - CRUD functions for data access
+        - Python utility functions for data operations
+        - Basic validation and error handling
+        - Sample data for development
+        - Proper error handling and status codes
+        - Database queries with SQLAlchemy
+        - Documentation with OpenAPI/Swagger
+  
+  # Code analysis and improvement
+  analyze:
+    description: "Analyze code for improvements and best practices"
+    context_needed: ["file path or code snippet"]
+    template: |
+      Analyze this code against my standards and suggest improvements:
+      - Performance optimizations
+      - Code organization and readability
+      - Python or JavaScript best practices
+      - Modern ES6+ patterns (for JS code)
+      - Security considerations
+      - Browser compatibility (for frontend)
+  
+  optimize:
+    description: "Optimize code for performance"
+    context_needed: ["target area (JS, Python, or data)"]
+    template: |
+      Optimize the specified code/area considering:
+      - Algorithm efficiency
+      - Runtime performance
+      - Memory usage
+      - Data access patterns
+      - Browser rendering (for frontend)
+      - Network efficiency
+  
+  refactor:
+    description: "Refactor code to improve structure and maintainability"
+    context_needed: ["code to refactor", "specific goals"]
+    template: |
+      Refactor this code following my patterns:
+      - Extract reusable functions and modules
+      - Improve separation of concerns
+      - Apply consistent naming conventions
+      - Simplify complex logic
+      - Make code more modular
+      - Add appropriate documentation
+
+# Workflow Automation
+workflows:
+  new_project:
+    description: "Set up a new project from scratch"
+    steps:
+      - "Create project folder structure"
+      - "Set up virtual environment"
+      - "Create initial HTML/CSS/JS files"
+      - "Initialize Git repository"
+      - "Create README.md with setup instructions"
+      - "Add .gitignore for Python and JS"
+    context_needed: ["project name", "project purpose"]
+  
+  feature_start:
+    description: "Start new feature development"
+    steps:
+      - "Create feature branch with conventional naming"
+      - "Set up feature folder structure" 
+      - "Create initial file templates"
+      - "Set up basic tests if needed"
+    context_needed: ["feature name", "feature type (frontend/backend/data)"]
+  
+  pre_commit:
+    description: "Pre-commit quality checks"
+    steps:
+      - "Run linting for Python and JS"
+      - "Run Python tests"
+      - "Check for debugging statements"
+      - "Verify code formatting"
+  
+  docker_setup:
+    description: "Set up Docker for the project"
+    steps:
+      - "Create Dockerfile for the application"
+      - "Set up docker-compose.yml file"
+      - "Create .dockerignore file"
+      - "Add container initialization scripts"
+      - "Document Docker usage in README"
+    context_needed: ["services needed (database, cache, etc.)"]
+
+# Context Templates - Reusable context for different scenarios
+contexts:
+  debugging:
+    include:
+      - "Recent error logs"
+      - "Stack trace analysis"
+      - "Related code files"
+      - "Environment details"
+      - "Steps to reproduce"
+  
+  code_review:
+    include:
+      - "Changed files"
+      - "Coding standards checklist"
+      - "Performance considerations"
+      - "Security implications"
+      - "Testing coverage"
+
+# Custom vocabulary - Your personal shorthand
+vocabulary:
+  # Common phrases you use
+  "pretty": "improve the CSS styling with modern techniques and good responsive design"
+  "clean js": "refactor JavaScript to use modern ES6+ patterns and clean code principles"
+  "data store": "implement simple data storage with JSON or SQLite"
+  "bulletproof": "add comprehensive error handling and input validation"
+  "static site": "create a static site with HTML/CSS/JS, suitable for hosting on GitHub Pages"
+  "spa": "create a single-page application structure with vanilla JS routing"
+  "venv setup": "set up a proper Python virtual environment with requirements.txt"
+  "server": "create a simple Python HTTP server with basic routing"
+  "docker it": "create Dockerfile and docker-compose.yml for the current project"
+  "docs": "generate clear documentation with examples and setup instructions"
+  
+# AI Behavior Settings
+ai_settings:
+  response_style: "practical and to-the-point"
+  code_style: "clean, simple, and well-commented"
+  include_explanations: true
+  suggest_alternatives: true
+  check_best_practices: true
+  focus_on_simplicity: true
+  prefer_vanilla_solutions: true

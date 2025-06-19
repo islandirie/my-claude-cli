@@ -1,0 +1,33 @@
+{
+  "name": "dev-assistant-cli",
+  "version": "1.0.0",
+  "description": "AI-powered development assistant with custom command language",
+  "main": "dev-cli.js",
+  "bin": {
+    "dev": "./dev-cli.js"
+  },
+  "scripts": {
+    "install-global": "npm install -g .",
+    "test": "node dev-cli.js --help"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "ai",
+    "development",
+    "cli",
+    "automation",
+    "claude",
+    "assistant"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/dev-assistant-cli.git"
+  }
+}
